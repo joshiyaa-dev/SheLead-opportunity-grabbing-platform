@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SheLeads — Women's Opportunity Intelligence Platform</title>
+  <meta name="description" content="SheLeads matches women with jobs, internships, hackathons and scholarships — with AI-powered match scores and readiness levels." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --sage: #8a9a6b; --sage-l: #c8d4b0; --sage-d: #5c6b47;
+      --lav: #c4a8d4; --lav-l: #e8d8f0; --lav-m: #9b7ab8; --lav-d: #6b4d8a;
+      --cream: #f8f4ee; --warm: #fdfaf6;
+      --text: #3a2d2a; --text2: #6b5a55; --text3: #9a8a85;
+      --purple: #7a5a8a; --purple-d: #5c3d70;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--warm); color: var(--text); font-size: 14px; }
+    .serif { font-family: 'Playfair Display', serif; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--warm); padding: 13px 36px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid #e8e0d8; position: sticky; top: 0; z-index: 200;
+    }
+    .brand { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--lav-d); }
+    .brand-sub { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 300; color: var(--text3); }
+    .nav-tabs { display: flex; gap: 4px; }
+    .ntab {
+      padding: 7px 18px; border-radius: 20px; font-size: 11px;
+      letter-spacing: 1.2px; text-transform: uppercase; cursor: pointer;
+      border: 1px solid transparent; color: var(--text2); background: transparent;
+      font-family: 'Lato', sans-serif; transition: all .2s;
+    }
+    .ntab.on { background: var(--lav-d); color: #fff; border-color: var(--lav-d); }
+    .ntab:hover:not(.on) { background: var(--lav-l); color: var(--lav-d); }
+    .nav-user { font-size: 12px; color: var(--text3); font-weight: 300; }
+
+    /* ── PAGES ── */
+    .pg { display: none; }
+    .pg.on { display: block; }
+
+    /* ── HOME ── */
+    .hero {
+      background: var(--cream); padding: 56px 36px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 42px; line-height: 1.2; margin-bottom: 14px; }
+    .hero h1 em { font-style: italic; color: var(--lav-d); }
+    .hero p { font-size: 14px; color: var(--text2); line-height: 1.85; font-weight: 300; margin-bottom: 26px; }
+    .btn-sage {
+      background: var(--sage-d); color: #fff; padding: 11px 26px; border-radius: 24px;
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      border: none; cursor: pointer; font-family: 'Lato', sans-serif; transition: background .2s;
+    }
+    .btn-sage:hover { background: var(--sage); }
+    .btn-lav {
+      background: var(--lav-d); color: #fff; padding: 11px 26px; border-radius: 24px;
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      border: none; cursor: pointer; font-family: 'Lato', sans-serif; margin-left: 10px; transition: background .2s;
+    }
+    .btn-lav:hover { background: var(--purple); }
+    .hero-cards { display: flex; flex-direction: column; gap: 10px; }
+    .hcard {
+      background: #fff; border-radius: 10px; border: 1px solid #ede8e0;
+      padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .hcard:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+    .hdot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .htitle { font-family: 'Playfair Display', serif; font-size: 13px; color: var(--text); }
+    .hsub { font-size: 11px; color: var(--text3); margin-top: 2px; font-weight: 300; }
+    .hpct { margin-left: auto; font-size: 13px; font-weight: 700; }
+
+    .sage-band { background: var(--sage); padding: 36px; text-align: center; color: #fff; }
+    .sage-band h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 8px; }
+    .sage-band p { font-size: 13px; opacity: .85; font-weight: 300; max-width: 540px; margin: 0 auto 18px; line-height: 1.8; }
+    .btn-white {
+      background: #fff; color: var(--sage-d); padding: 10px 26px; border-radius: 20px;
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      border: none; cursor: pointer; font-family: 'Lato', sans-serif;
+    }
+
+    .hiw { background: var(--lav-l); padding: 52px 36px; text-align: center; }
+    .hiw-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--lav-d); margin-bottom: 6px; }
+    .divider { width: 42px; height: 1px; background: var(--lav-m); margin: 8px auto 28px; }
+    .hiw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 640px; margin: 0 auto; }
+    .hiw-card { background: #fff; border-radius: 12px; padding: 24px 18px; border: 1px solid var(--lav); }
+    .hiw-icon { font-size: 28px; margin-bottom: 12px; }
+    .hiw-name { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--lav-d); margin-bottom: 8px; }
+    .hiw-desc { font-size: 12px; color: var(--text2); font-weight: 300; line-height: 1.7; }
+
+    .stats { background: var(--purple); padding: 30px 36px; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { text-align: center; padding: 0 8px; }
+    .stat-n { font-family: 'Playfair Display', serif; font-size: 30px; color: #fff; }
+    .stat-l { font-size: 10px; color: rgba(255,255,255,.7); letter-spacing: 1.2px; text-transform: uppercase; margin-top: 4px; }
+
+    /* ── PROFILE ── */
+    .profile-wrap { max-width: 640px; margin: 0 auto; padding: 40px 32px; }
+    .sec-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--text); margin-bottom: 4px; }
+    .sec-sub { font-size: 13px; color: var(--text3); font-weight: 300; margin-bottom: 24px; }
+    .fcard { background: #fff; border-radius: 14px; border: 1px solid #ede8e0; padding: 28px; }
+    .flabel { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text2); margin-bottom: 8px; display: block; }
+    .finput {
+      width: 100%; padding: 10px 16px; border-radius: 24px;
+      border: 1px solid #ddd8d0; font-size: 13px; color: var(--text);
+      background: var(--cream); outline: none; font-family: 'Lato', sans-serif; margin-bottom: 20px;
+      transition: border-color .2s;
+    }
+    .finput:focus { border-color: var(--lav); }
+    .pills { display: flex; flex-wrap: wrap; gap: 7px; min-height: 34px; margin-bottom: 12px; align-items: center; }
+    .spill {
+      background: var(--lav-l); color: var(--lav-d); padding: 5px 12px;
+      border-radius: 20px; font-size: 11px; display: flex; align-items: center; gap: 5px;
+    }
+    .spill button { background: none; border: none; cursor: pointer; color: var(--lav-m); font-size: 14px; line-height: 1; padding: 0; }
+    .skill-search {
+      width: 100%; padding: 8px 14px; border-radius: 20px; border: 1px solid #ddd8d0;
+      font-size: 12px; margin-bottom: 10px; font-family: 'Lato', sans-serif;
+      outline: none; background: var(--cream); color: var(--text);
+    }
+    .sgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 190px; overflow-y: auto; padding-right: 4px; }
+    .sgrid::-webkit-scrollbar { width: 4px; }
+    .sgrid::-webkit-scrollbar-track { background: var(--cream); border-radius: 2px; }
+    .sgrid::-webkit-scrollbar-thumb { background: var(--lav); border-radius: 2px; }
+    .sbtn {
+      padding: 6px 8px; border-radius: 18px; font-size: 11px; cursor: pointer;
+      border: 1px solid #ddd8d0; background: var(--warm); color: var(--text2);
+      font-family: 'Lato', sans-serif; text-align: center; transition: all .15s;
+    }
+    .sbtn.on { background: var(--lav-d); color: #fff; border-color: var(--lav-d); }
+    .sbtn:hover:not(.on) { background: var(--lav-l); border-color: var(--lav); }
+    .quick-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+    .qbtn {
+      padding: 5px 13px; border-radius: 18px; font-size: 11px; cursor: pointer;
+      border: 1px solid var(--sage); color: var(--sage-d); background: transparent;
+      font-family: 'Lato', sans-serif; transition: all .15s;
+    }
+    .qbtn.on { background: var(--sage); color: #fff; }
+    .save-btn {
+      width: 100%; padding: 13px; border-radius: 24px; background: var(--lav-d); color: #fff;
+      font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+      border: none; cursor: pointer; margin-top: 14px;
+      font-family: 'Lato', sans-serif; transition: background .2s;
+    }
+    .save-btn:hover { background: var(--purple); }
+    .saved-msg {
+      background: var(--lav-l); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px;
+      border: 1px solid var(--lav); display: none; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--lav-d);
+    }
+    .custom-row { display: flex; gap: 8px; margin-top: 8px; }
+
+    /* ── DASHBOARD ── */
+    .dash-top-band { background: var(--cream); padding: 28px 36px 0; }
+    .dash-name { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--text); margin-bottom: 4px; }
+    .dash-meta { font-size: 13px; color: var(--text3); font-weight: 300; margin-bottom: 20px; }
+    .filters { display: flex; gap: 10px; flex-wrap: wrap; padding-bottom: 22px; align-items: center; }
+    .fsearch {
+      flex: 1; min-width: 180px; padding: 9px 16px; border-radius: 24px;
+      border: 1px solid #ddd8d0; font-size: 13px; font-family: 'Lato', sans-serif;
+      background: #fff; color: var(--text); outline: none;
+    }
+    .fsel {
+      padding: 9px 14px; border-radius: 24px; border: 1px solid #ddd8d0;
+      font-size: 12px; font-family: 'Lato', sans-serif; background: #fff;
+      color: var(--text2); cursor: pointer; outline: none;
+    }
+    .res-ct { margin-left: auto; font-size: 12px; color: var(--text3); white-space: nowrap; }
+
+    .opp-section { padding: 22px 36px 8px; }
+    .ogrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+    .ocard {
+      background: #fff; border-radius: 14px; border: 1px solid #ede8e0;
+      padding: 20px; position: relative; overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .ocard:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.07); }
+    .ocard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .ocard.ready::before { background: var(--sage); }
+    .ocard.partial::before { background: #e8a020; }
+    .ocard.notready::before { background: #c84030; }
+
+    .ocard-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+    .otitle { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--text); line-height: 1.3; }
+    .ocomp { font-size: 11px; color: var(--text3); margin-top: 3px; font-weight: 300; }
+    .tbadge { font-size: 10px; padding: 3px 10px; border-radius: 12px; white-space: nowrap; flex-shrink: 0; font-weight: 400; }
+    .tb-i { background: #e0f2fe; color: #0369a1; }
+    .tb-j { background: #dcfce7; color: #166534; }
+    .tb-h { background: #fef3c7; color: #92400e; }
+    .tb-s { background: #f3e8ff; color: #6b21a8; }
+
+    .sbar-row { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+    .sbar-bg { flex: 1; height: 5px; background: #f0ece6; border-radius: 3px; overflow: hidden; }
+    .sbar { height: 100%; border-radius: 3px; transition: width .6s ease; }
+    .sbar.ready { background: var(--sage); }
+    .sbar.partial { background: #e8a020; }
+    .sbar.notready { background: #c84030; }
+    .spct { font-size: 13px; font-weight: 700; min-width: 34px; text-align: right; }
+    .spct.ready { color: var(--sage-d); }
+    .spct.partial { color: #a06000; }
+    .spct.notready { color: #903020; }
+
+    .rtag { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 12px; margin-bottom: 8px; }
+    .rt-ready { background: #d1fae5; color: #065f46; }
+    .rt-partial { background: #fef3c7; color: #92400e; }
+    .rt-notready { background: #fee2e2; color: #7f1d1d; }
+
+    .miss-lbl { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+    .mpills { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+    .mpill { background: var(--cream); color: var(--text2); font-size: 10px; padding: 3px 8px; border-radius: 10px; border: 1px solid #e0dbd5; }
+
+    .ofoot { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f0ece6; }
+    .deadline { font-size: 11px; color: var(--text3); }
+    .abtn {
+      padding: 7px 18px; border-radius: 20px; font-size: 11px; letter-spacing: 1px;
+      text-transform: uppercase; cursor: pointer; font-family: 'Lato', sans-serif;
+      border: 1px solid var(--lav-d); color: var(--lav-d); background: transparent;
+      transition: all .2s;
+    }
+    .abtn:hover { background: var(--lav-d); color: #fff; }
+    .abtn.done { background: var(--sage); color: #fff; border-color: var(--sage); cursor: default; }
+
+    .lm-wrap { text-align: center; padding: 24px 0; }
+    .lmbtn {
+      padding: 11px 36px; border-radius: 24px; border: 1px solid var(--sage);
+      color: var(--sage-d); background: transparent; font-size: 11px;
+      letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer;
+      font-family: 'Lato', sans-serif; transition: background .2s;
+    }
+    .lmbtn:hover { background: var(--sage-l); }
+
+    .applied-band { background: var(--lav-l); padding: 24px 36px; border-top: 1px solid var(--lav); display: none; }
+    .applied-band h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--lav-d); margin-bottom: 14px; }
+    .achips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .achip { background: #fff; border: 1px solid var(--lav); border-radius: 20px; padding: 6px 14px; font-size: 12px; color: var(--lav-d); display: flex; align-items: center; gap: 6px; }
+
+    .sug-band { background: var(--purple); padding: 36px; display: none; }
+    .sug-band h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; margin-bottom: 16px; }
+    .sug-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .sugcard { background: rgba(255,255,255,.13); border-radius: 10px; padding: 16px; border: 1px solid rgba(255,255,255,.2); font-size: 12px; color: rgba(255,255,255,.92); line-height: 1.7; }
+
+    .noprofile { background: var(--cream); border-radius: 14px; border: 2px dashed var(--lav); padding: 48px; text-align: center; margin: 36px; }
+    .noprofile p { color: var(--text2); font-size: 14px; margin-bottom: 20px; }
+    .noprofile-icon { font-size: 44px; margin-bottom: 14px; }
+    .empty { text-align: center; padding: 48px; color: var(--text3); grid-column: 1/-1; font-size: 14px; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text); padding: 40px 36px; color: rgba(255,255,255,.65); }
+    .fg { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 28px; }
+    .fbrand { font-family: 'Playfair Display', serif; font-size: 18px; color: #fff; margin-bottom: 8px; }
+    .fp { font-size: 12px; line-height: 1.8; font-weight: 300; }
+    .fcol h4 { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; margin-bottom: 14px; }
+    .fcol a { display: block; font-size: 12px; color: rgba(255,255,255,.55); text-decoration: none; margin-bottom: 6px; transition: color .2s; }
+    .fcol a:hover { color: rgba(255,255,255,.9); }
+    .fbot { border-top: 1px solid rgba(255,255,255,.1); padding-top: 18px; text-align: center; font-size: 11px; color: rgba(255,255,255,.35); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 12px 16px; }
+      .nav-tabs { gap: 2px; }
+      .ntab { padding: 6px 12px; font-size: 10px; }
+      .hero { grid-template-columns: 1fr; padding: 32px 16px; }
+      .hero h1 { font-size: 30px; }
+      .hero-cards { display: none; }
+      .sage-band, .hiw, .stats { padding: 28px 16px; }
+      .hiw-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .profile-wrap { padding: 24px 16px; }
+      .sgrid { grid-template-columns: repeat(3, 1fr); }
+      .dash-top-band { padding: 20px 16px 0; }
+      .opp-section { padding: 16px 16px 8px; }
+      .ogrid { grid-template-columns: 1fr; }
+      .sug-grid { grid-template-columns: 1fr; }
+      .fg { grid-template-columns: 1fr 1fr; gap: 20px; }
+      footer { padding: 28px 16px; }
+      .noprofile { margin: 20px 16px; }
+      .applied-band, .sug-band { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="brand serif">SheLeads</div>
+    <div class="brand-sub">Opportunity Intelligence</div>
+  </div>
+  <div class="nav-tabs">
+    <button class="ntab on" onclick="go('home')">Home</button>
+    <button class="ntab" onclick="go('profile')">My Profile</button>
+    <button class="ntab" onclick="go('dashboard')">Dashboard</button>
+  </div>
+  <div class="nav-user" id="nav-user">Welcome! 💜</div>
+</nav>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div class="pg on" id="pg-home">
+  <div class="hero">
+    <div>
+      <p style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--sage-d);margin-bottom:10px;">Women's Opportunity Platform</p>
+      <h1 class="serif">Discover, evaluate &amp; <em>apply with confidence</em></h1>
+      <p>SheLeads matches you with jobs, internships, hackathons, and scholarships — then tells you exactly how ready you are and what to learn next.</p>
+      <button class="btn-sage" onclick="go('profile')">Build My Profile</button>
+      <button class="btn-lav" onclick="go('dashboard')">Explore Opportunities</button>
+    </div>
+    <div class="hero-cards">
+      <div class="hcard"><div class="hdot" style="background:var(--sage);"></div><div><div class="htitle">Frontend Developer Intern</div><div class="hsub">TechNova · Remote</div></div><div class="hpct" style="color:var(--sage-d);">92%</div></div>
+      <div class="hcard"><div class="hdot" style="background:#e8a020;"></div><div><div class="htitle">HerHack 2025</div><div class="hsub">Hackathon · ₹5,00,000 prize</div></div><div class="hpct" style="color:#a06000;">67%</div></div>
+      <div class="hcard"><div class="hdot" style="background:var(--lav-m);"></div><div><div class="htitle">Google WTM Scholarship</div><div class="hsub">Google · $10,000</div></div><div class="hpct" style="color:var(--lav-d);">75%</div></div>
+      <div class="hcard"><div class="hdot" style="background:#c84030;"></div><div><div class="htitle">AWS She Builds Scholarship</div><div class="hsub">Amazon · $5,000</div></div><div class="hpct" style="color:#903020;">28%</div></div>
+    </div>
+  </div>
+
+  <div class="sage-band">
+    <h2 class="serif">Why SheLeads?</h2>
+    <p>We don't just show you opportunities — we tell you your readiness score, missing skills, and smart suggestions to help you grow and succeed.</p>
+    <button class="btn-white" onclick="go('profile')">Get Started ✦</button>
+  </div>
+
+  <div class="hiw">
+    <div class="hiw-title serif">How it works</div>
+    <div class="divider"></div>
+    <div class="hiw-grid">
+      <div class="hiw-card"><div class="hiw-icon">👤</div><div class="hiw-name serif">Build Profile</div><div class="hiw-desc">Add your name and select your skills from our curated list of 90+ options</div></div>
+      <div class="hiw-card"><div class="hiw-icon">📊</div><div class="hiw-name serif">Get Matched</div><div class="hiw-desc">Our engine calculates your match score and readiness for every opportunity</div></div>
+      <div class="hiw-card"><div class="hiw-icon">🚀</div><div class="hiw-name serif">Apply &amp; Grow</div><div class="hiw-desc">Apply confidently and get smart suggestions on which skills to build next</div></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item"><div class="stat-n serif">30+</div><div class="stat-l">Opportunities</div></div>
+    <div class="stat-item"><div class="stat-n serif">4</div><div class="stat-l">Categories</div></div>
+    <div class="stat-item"><div class="stat-n serif">AI</div><div class="stat-l">Match Engine</div></div>
+    <div class="stat-item"><div class="stat-n serif">Free</div><div class="stat-l">Always</div></div>
+  </div>
+
+  <footer>
+    <div class="fg">
+      <div><div class="fbrand serif">SheLeads</div><p class="fp">Empowering women to discover, evaluate, and apply for opportunities that match their skills and ambitions.</p></div>
+      <div class="fcol"><h4>Platform</h4><a href="#">Dashboard</a><a href="#">Profile</a><a href="#">Opportunities</a></div>
+      <div class="fcol"><h4>Categories</h4><a href="#">Internships</a><a href="#">Jobs</a><a href="#">Hackathons</a><a href="#">Scholarships</a></div>
+      <div class="fcol"><h4>About</h4><a href="#">Our Mission</a><a href="#">Contact</a><a href="#">Privacy</a></div>
+    </div>
+    <div class="fbot">© 2025 SheLeads. Built with love for women everywhere. 💜</div>
+  </footer>
+</div>
+
+<!-- ═══════════ PROFILE ═══════════ -->
+<div class="pg" id="pg-profile">
+  <div class="profile-wrap">
+    <div class="sec-title serif">My Profile</div>
+    <p class="sec-sub">Tell us about yourself so we can find your perfect matches</p>
+
+    <div class="saved-msg" id="saved-msg">✓ &nbsp;Profile saved! Head to Dashboard to see your matches.</div>
+
+    <div class="fcard">
+      <label class="flabel">Your Name</label>
+      <input class="finput" id="uname" type="text" placeholder="E.g. Priya Sharma" />
+
+      <label class="flabel">Your Skills</label>
+      <div class="pills" id="pills-wrap"><span style="font-size:12px;color:var(--text3);">No skills selected yet…</span></div>
+
+      <input class="skill-search" id="skill-q" type="text" placeholder="Search skills…" oninput="filterS()" />
+      <div class="sgrid" id="sgrid"></div>
+
+      <div id="other-row" style="display:none; margin-top:14px;">
+        <label class="flabel">Add Custom Skill</label>
+        <div class="custom-row">
+          <input class="finput" id="custom-s" type="text" placeholder="Type your skill…" style="margin-bottom:0;flex:1;" onkeydown="if(event.key==='Enter')addCustom()" />
+          <button class="btn-sage" onclick="addCustom()">Add</button>
+        </div>
+      </div>
+
+      <label class="flabel" style="margin-top:16px;">Quick Add Popular Skills</label>
+      <div class="quick-row" id="quick-row"></div>
+
+      <button class="save-btn" onclick="saveProfile()">Save &amp; Find My Matches ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ DASHBOARD ═══════════ -->
+<div class="pg" id="pg-dashboard">
+  <div id="noprofile" class="noprofile" style="display:none;">
+    <div class="noprofile-icon">✦</div>
+    <p>Set up your profile first so we can match you with the right opportunities!</p>
+    <button class="btn-lav" onclick="go('profile')">Build My Profile</button>
+  </div>
+
+  <div id="dash-main">
+    <div class="dash-top-band">
+      <div class="dash-name serif" id="dash-name">Your Opportunities</div>
+      <div class="dash-meta" id="dash-meta">Build your profile to see personalised matches</div>
+      <div class="filters">
+        <input class="fsearch" type="text" id="fsearch" placeholder="Search opportunities…" oninput="renderCards()" />
+        <select class="fsel" id="ftype" onchange="renderCards()">
+          <option value="">All Types</option>
+          <option>Internship</option><option>Job</option><option>Hackathon</option><option>Scholarship</option>
+        </select>
+        <select class="fsel" id="fready" onchange="renderCards()">
+          <option value="">All Levels</option>
+          <option value="ready">Ready ✦</option>
+          <option value="partial">Partially Ready</option>
+          <option value="notready">Not Ready</option>
+        </select>
+        <span class="res-ct" id="res-ct">0 results</span>
+      </div>
+    </div>
+
+    <div class="opp-section">
+      <div class="ogrid" id="ogrid"></div>
+      <div class="lm-wrap" id="lm-wrap" style="display:none;">
+        <button class="lmbtn" onclick="loadMore()">Load More ✦</button>
+      </div>
+    </div>
+
+    <div class="applied-band" id="applied-band">
+      <h3 class="serif">Applied Opportunities</h3>
+      <div class="achips" id="achips"></div>
+    </div>
+
+    <div class="sug-band" id="sug-band">
+      <h3 class="serif">Smart Suggestions</h3>
+      <div class="sug-grid" id="sug-grid"></div>
+    </div>
+
+    <footer>
+      <div class="fg">
+        <div><div class="fbrand serif">SheLeads</div><p class="fp">Empowering women to discover and apply for opportunities that match their skills and ambitions.</p></div>
+        <div class="fcol"><h4>Platform</h4><a href="#">Dashboard</a><a href="#">Profile</a></div>
+        <div class="fcol"><h4>Categories</h4><a href="#">Internships</a><a href="#">Jobs</a><a href="#">Hackathons</a><a href="#">Scholarships</a></div>
+        <div class="fcol"><h4>About</h4><a href="#">Mission</a><a href="#">Contact</a></div>
+      </div>
+      <div class="fbot">© 2025 SheLeads. Built with love for women everywhere. 💜</div>
+    </footer>
+  </div>
+</div>
+
+<script>
+  const SKILLS = ["JavaScript","TypeScript","React","Vue.js","Angular","Node.js","Python","Django","Flask","FastAPI","Java","Spring Boot","C++","C#","Go","Rust","Swift","Kotlin","Flutter","React Native","HTML","CSS","Tailwind CSS","GraphQL","REST APIs","SQL","PostgreSQL","MySQL","MongoDB","Redis","Firebase","AWS","Azure","GCP","Docker","Kubernetes","CI/CD","Git","Linux","Machine Learning","Deep Learning","TensorFlow","PyTorch","NLP","Computer Vision","Data Analysis","Pandas","NumPy","Scikit-learn","Tableau","Power BI","Blockchain","Solidity","Cybersecurity","Networking","DevOps","UI Design","UX Design","Figma","Adobe XD","Photoshop","Illustrator","After Effects","Motion Graphics","Wireframing","Prototyping","User Research","Design Systems","Accessibility Design","Project Management","Agile","Scrum","Product Management","Business Analysis","Financial Analysis","Marketing","Digital Marketing","SEO","Content Writing","Copywriting","Social Media","Email Marketing","Sales","Business Development","Strategy","Operations","Finance","Accounting","Human Resources","Leadership","Research","Data Science","Statistics","Communication","Entrepreneurship","Other"];
+
+  const QUICK = ["Python","React","Figma","Machine Learning","SQL","JavaScript","UI Design","Node.js"];
+
+  const OPPS = [
+    {id:1,title:"Frontend Developer Intern",co:"TechNova",type:"Internship",skills:["React","JavaScript","CSS","HTML","Git"],dl:"2025-06-15",ex:"Remote · ₹25k/mo"},
+    {id:2,title:"Data Science Intern",co:"Analytics Hub",type:"Internship",skills:["Python","Pandas","Machine Learning","SQL","NumPy"],dl:"2025-05-30",ex:"Bangalore · ₹20k/mo"},
+    {id:3,title:"UX Design Intern",co:"DesignCraft",type:"Internship",skills:["Figma","UX Design","Wireframing","User Research","Prototyping"],dl:"2025-06-01",ex:"Remote · ₹18k/mo"},
+    {id:4,title:"ML Engineer Intern",co:"AiSpark",type:"Internship",skills:["Python","TensorFlow","Deep Learning","Machine Learning","NumPy"],dl:"2025-06-10",ex:"Pune · ₹30k/mo"},
+    {id:5,title:"Blockchain Developer Intern",co:"ChainLab",type:"Internship",skills:["Blockchain","Solidity","JavaScript","Python"],dl:"2025-06-25",ex:"Remote · ₹28k/mo"},
+    {id:6,title:"Backend Developer Intern",co:"CloudStack",type:"Internship",skills:["Node.js","REST APIs","MongoDB","Docker","Git"],dl:"2025-07-01",ex:"Hyderabad · ₹22k/mo"},
+    {id:7,title:"Marketing Intern",co:"BrandBurst",type:"Internship",skills:["Digital Marketing","SEO","Content Writing","Social Media"],dl:"2025-05-25",ex:"Mumbai · ₹15k/mo"},
+    {id:8,title:"Full Stack Developer",co:"WebLaunch",type:"Job",skills:["React","Node.js","MongoDB","JavaScript","REST APIs"],dl:"2025-06-30",ex:"Remote · ₹8–14 LPA"},
+    {id:9,title:"Senior Data Scientist",co:"DataMind",type:"Job",skills:["Python","Machine Learning","Deep Learning","SQL","Statistics"],dl:"2025-07-15",ex:"Bangalore · ₹18–28 LPA"},
+    {id:10,title:"Product Designer",co:"Crafted",type:"Job",skills:["UI Design","UX Design","Figma","Design Systems","Prototyping"],dl:"2025-06-20",ex:"Remote · ₹10–16 LPA"},
+    {id:11,title:"DevOps Engineer",co:"InfraScale",type:"Job",skills:["AWS","Docker","Kubernetes","CI/CD","Linux"],dl:"2025-07-01",ex:"Hyderabad · ₹12–20 LPA"},
+    {id:12,title:"NLP Engineer",co:"LinguaTech",type:"Job",skills:["NLP","Python","Deep Learning","TensorFlow","Machine Learning"],dl:"2025-07-20",ex:"Remote · ₹15–25 LPA"},
+    {id:13,title:"Product Manager",co:"LaunchPad",type:"Job",skills:["Product Management","Agile","Strategy","Communication","Research"],dl:"2025-06-22",ex:"Bangalore · ₹15–25 LPA"},
+    {id:14,title:"Data Analyst",co:"MetricFlow",type:"Job",skills:["SQL","Python","Tableau","Power BI","Statistics"],dl:"2025-06-30",ex:"Bangalore · ₹8–15 LPA"},
+    {id:15,title:"Cybersecurity Analyst",co:"ShieldForce",type:"Job",skills:["Cybersecurity","Networking","Linux","Python"],dl:"2025-07-05",ex:"Delhi · ₹10–16 LPA"},
+    {id:16,title:"HerHack 2025",co:"WomenInTech",type:"Hackathon",skills:["JavaScript","Python","React","Machine Learning"],dl:"2025-05-20",ex:"Online · ₹5,00,000 prize"},
+    {id:17,title:"AI for Good Hackathon",co:"TechSoc",type:"Hackathon",skills:["Machine Learning","Python","NLP","Deep Learning"],dl:"2025-05-22",ex:"Bangalore · ₹2,00,000 prize"},
+    {id:18,title:"FinTech Innovation Challenge",co:"PayNext",type:"Hackathon",skills:["JavaScript","Python","Blockchain","React","REST APIs"],dl:"2025-06-01",ex:"Mumbai · ₹3,00,000 prize"},
+    {id:19,title:"Design Sprint Challenge",co:"DesignWeek",type:"Hackathon",skills:["UI Design","UX Design","Figma","Prototyping"],dl:"2025-05-25",ex:"Online · ₹1,50,000 prize"},
+    {id:20,title:"Generative AI Hackathon",co:"PromptCraft",type:"Hackathon",skills:["Python","Machine Learning","NLP","Deep Learning","React"],dl:"2025-07-14",ex:"Online · $15,000 prize"},
+    {id:21,title:"Cybersecurity CTF",co:"HackTheBox India",type:"Hackathon",skills:["Cybersecurity","Networking","Linux","Python"],dl:"2025-06-25",ex:"Online · ₹75,000 prize"},
+    {id:22,title:"Smart India Hackathon",co:"Govt. of India",type:"Hackathon",skills:["Python","JavaScript","Machine Learning","Flutter"],dl:"2025-06-15",ex:"Pan India · ₹1,00,000 prize"},
+    {id:23,title:"Google Women Techmakers",co:"Google",type:"Scholarship",skills:["Python","Machine Learning","JavaScript","Leadership"],dl:"2025-06-01",ex:"Global · $10,000"},
+    {id:24,title:"Adobe Research Scholarship",co:"Adobe",type:"Scholarship",skills:["UI Design","Machine Learning","Computer Vision","Research"],dl:"2025-06-10",ex:"Global · $10,000"},
+    {id:25,title:"Tata Scholarship for Women",co:"Tata Trust",type:"Scholarship",skills:["Research","Problem Solving","Leadership"],dl:"2025-05-31",ex:"India · ₹3,00,000"},
+    {id:26,title:"AWS She Builds Scholarship",co:"Amazon Web Services",type:"Scholarship",skills:["AWS","Python","DevOps"],dl:"2025-07-10",ex:"Global · $5,000"},
+    {id:27,title:"Meta AI Research Fellowship",co:"Meta",type:"Scholarship",skills:["Machine Learning","Research","Python","Deep Learning"],dl:"2025-07-20",ex:"Global · $42,000"},
+    {id:28,title:"Women Founders Grant",co:"StartHer Foundation",type:"Scholarship",skills:["Entrepreneurship","Leadership","Strategy","Product Management"],dl:"2025-07-18",ex:"India · ₹10,00,000"},
+    {id:29,title:"Goldman Sachs Leadership Award",co:"Goldman Sachs",type:"Scholarship",skills:["Finance","Leadership","Strategy","Communication"],dl:"2025-06-25",ex:"India · ₹5,00,000"},
+    {id:30,title:"Infosys Women in Tech Scholarship",co:"Infosys Foundation",type:"Scholarship",skills:["Python","Java","Machine Learning","Communication"],dl:"2025-06-20",ex:"India · ₹2,50,000"},
+  ];
+
+  const S = { name: "", skills: [], applied: new Set(), pg: 0, pgSize: 8, filtered: [] };
+
+  function match(u, r) {
+    if (!r.length) return { score: 100, miss: [], matched: [] };
+    if (!u.length) return { score: 0, miss: r, matched: [] };
+    const ul = u.map(x => x.toLowerCase());
+    const matched = r.filter(s => ul.includes(s.toLowerCase()));
+    const miss = r.filter(s => !ul.includes(s.toLowerCase()));
+    return { score: Math.round(matched.length / r.length * 100), miss, matched };
+  }
+
+  function rLevel(sc) {
+    if (sc >= 70) return { lv: "Ready ✦", cls: "ready", tc: "rt-ready" };
+    if (sc >= 40) return { lv: "Partially Ready", cls: "partial", tc: "rt-partial" };
+    return { lv: "Not Ready", cls: "notready", tc: "rt-notready" };
+  }
+
+  function tbClass(t) {
+    return { Internship: "tb-i", Job: "tb-j", Hackathon: "tb-h", Scholarship: "tb-s" }[t] || "tb-i";
+  }
+
+  function go(id) {
+    document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+    document.querySelectorAll('.ntab').forEach(t => t.classList.remove('on'));
+    document.getElementById('pg-' + id).classList.add('on');
+    const idx = { home: 0, profile: 1, dashboard: 2 }[id];
+    document.querySelectorAll('.ntab')[idx].classList.add('on');
+    if (id === 'dashboard') renderDash();
+  }
+
+  let sAll = [...SKILLS];
+  function filterS() {
+    const q = document.getElementById('skill-q').value.toLowerCase();
+    sAll = SKILLS.filter(s => s.toLowerCase().includes(q));
+    buildGrid();
+  }
+
+  function buildGrid() {
+    const g = document.getElementById('sgrid');
+    g.innerHTML = '';
+    sAll.slice(0, 40).forEach(s => {
+      const b = document.createElement('button');
+      b.className = 'sbtn' + (S.skills.includes(s) ? ' on' : '');
+      b.textContent = s;
+      b.onclick = () => toggleS(s);
+      g.appendChild(b);
+    });
+  }
+
+  function buildQuick() {
+    const r = document.getElementById('quick-row');
+    r.innerHTML = QUICK.map(s =>
+      `<button class="qbtn${S.skills.includes(s) ? ' on' : ''}" onclick="toggleS('${s}')">${(S.skills.includes(s) ? '✓ ' : '') + s}</button>`
+    ).join('');
+  }
+
+  function toggleS(s) {
+    if (s === 'Other') {
+      document.getElementById('other-row').style.display = 'block';
+      if (!S.skills.includes('Other')) S.skills.push('Other');
+    } else {
+      const i = S.skills.indexOf(s);
+      if (i >= 0) S.skills.splice(i, 1); else S.skills.push(s);
+    }
+    renderPills(); buildGrid(); buildQuick();
+  }
+
+  function renderPills() {
+    const w = document.getElementById('pills-wrap');
+    const disp = S.skills.filter(s => s !== 'Other');
+    if (!disp.length) { w.innerHTML = '<span style="font-size:12px;color:var(--text3);">No skills selected yet…</span>'; return; }
+    w.innerHTML = disp.map(s => `<span class="spill">${s}<button onclick="removeS('${s.replace(/'/g,"\\'")}')">×</button></span>`).join('');
+  }
+
+  function removeS(s) { S.skills = S.skills.filter(x => x !== s); renderPills(); buildGrid(); buildQuick(); }
+
+  function addCustom() {
+    const v = document.getElementById('custom-s').value.trim();
+    if (v && !S.skills.includes(v)) {
+      S.skills = S.skills.filter(s => s !== 'Other');
+      S.skills.push(v);
+      document.getElementById('custom-s').value = '';
+      document.getElementById('other-row').style.display = 'none';
+      renderPills(); buildGrid(); buildQuick();
+    }
+  }
+
+  function saveProfile() {
+    S.name = document.getElementById('uname').value.trim() || 'You';
+    document.getElementById('nav-user').textContent = 'Hi, ' + S.name + ' 💜';
+    const m = document.getElementById('saved-msg');
+    m.style.display = 'flex';
+    setTimeout(() => m.style.display = 'none', 3000);
+  }
+
+  function renderDash() {
+    const has = S.skills.length > 0;
+    document.getElementById('noprofile').style.display = has ? 'none' : 'block';
+    if (has) {
+      document.getElementById('dash-name').textContent = 'Opportunities for ' + S.name;
+      document.getElementById('dash-meta').textContent = S.skills.length + ' skills · ' + OPPS.length + ' opportunities analysed';
+    }
+    renderCards(); renderSuggestions();
+  }
+
+  function renderCards() {
+    const q = document.getElementById('fsearch').value.toLowerCase();
+    const ft = document.getElementById('ftype').value;
+    const fr = document.getElementById('fready').value;
+    S.filtered = OPPS.map(o => {
+      const { score, miss, matched } = match(S.skills, o.skills);
+      const r = rLevel(score);
+      return { ...o, score, miss, matched, r };
+    }).filter(o => {
+      if (ft && o.type !== ft) return false;
+      if (fr && o.r.cls !== fr) return false;
+      if (q && !o.title.toLowerCase().includes(q) && !o.co.toLowerCase().includes(q)) return false;
+      return true;
+    }).sort((a, b) => b.score - a.score);
+    S.pg = 1;
+    document.getElementById('res-ct').textContent = S.filtered.length + ' results';
+    drawCards();
+  }
+
+  function drawCards() {
+    const g = document.getElementById('ogrid');
+    const items = S.filtered.slice(0, S.pg * S.pgSize);
+    if (!items.length) {
+      g.innerHTML = `<div class="empty"><p style="font-size:32px;margin-bottom:12px;">🔍</p><p>No opportunities found — try adjusting your filters.</p></div>`;
+      document.getElementById('lm-wrap').style.display = 'none'; return;
+    }
+    g.innerHTML = items.map(o => `
+      <div class="ocard ${o.r.cls}">
+        <div class="ocard-head">
+          <div>
+            <div class="otitle serif">${o.title}</div>
+            <div class="ocomp">${o.co} · ${o.ex}</div>
+          </div>
+          <span class="tbadge ${tbClass(o.type)}">${o.type}</span>
+        </div>
+        <div class="sbar-row">
+          <div class="sbar-bg"><div class="sbar ${o.r.cls}" style="width:${o.score}%"></div></div>
+          <span class="spct ${o.r.cls}">${o.score}%</span>
+        </div>
+        <span class="rtag ${o.r.tc}">${o.r.lv}</span>
+        ${o.miss.length
+          ? `<div class="miss-lbl">Skills to learn</div><div class="mpills">${o.miss.slice(0, 4).map(m => `<span class="mpill">${m}</span>`).join('')}${o.miss.length > 4 ? `<span class="mpill">+${o.miss.length - 4} more</span>` : ''}</div>`
+          : `<div style="font-size:12px;color:var(--sage-d);margin-bottom:10px;">🎉 All required skills matched!</div>`}
+        <div class="ofoot">
+          <span class="deadline">📅 ${o.dl}</span>
+          <button class="abtn${S.applied.has(o.id) ? ' done' : ''}" onclick="applyTo(${o.id}, this)">${S.applied.has(o.id) ? 'Applied ✓' : 'Apply Now'}</button>
+        </div>
+      </div>`).join('');
+    document.getElementById('lm-wrap').style.display = S.filtered.length > S.pg * S.pgSize ? 'block' : 'none';
+  }
+
+  function loadMore() { S.pg++; drawCards(); }
+
+  function applyTo(id, btn) {
+    if (S.applied.has(id)) return;
+    S.applied.add(id);
+    btn.textContent = 'Applied ✓';
+    btn.classList.add('done');
+    const ab = document.getElementById('applied-band');
+    ab.style.display = 'block';
+    const chips = document.getElementById('achips');
+    const o = OPPS.find(x => x.id === id);
+    const chip = document.createElement('span');
+    chip.className = 'achip';
+    chip.innerHTML = '✓ ' + o.title;
+    chips.appendChild(chip);
+  }
+
+  function renderSuggestions() {
+    const band = document.getElementById('sug-band');
+    if (!S.skills.length) { band.style.display = 'none'; return; }
+    band.style.display = 'block';
+    const freq = {};
+    OPPS.forEach(o => { const { miss } = match(S.skills, o.skills); miss.forEach(s => { freq[s] = (freq[s] || 0) + 1; }); });
+    const top = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 3);
+    const sugs = [
+      ...top.map(([s, c]) => `💡 Learn "${s}" to unlock ${c} more opportunit${c === 1 ? 'y' : 'ies'}`),
+      "📅 Apply to at least 2 opportunities this week to stay consistent",
+      "🔗 Update your LinkedIn with your latest projects",
+      "📝 Tailor your resume for each role you apply to"
+    ].slice(0, 6);
+    document.getElementById('sug-grid').innerHTML = sugs.map(s => `<div class="sugcard">${s}</div>`).join('');
+  }
+
+  // Init
+  buildGrid(); buildQuick(); renderPills();
+</script>
+</body>
+</html>
